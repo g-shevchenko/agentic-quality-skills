@@ -5,6 +5,8 @@ verified TDD, quality gates, red flags, golden benchmarks, and measured uplift l
 
 Created from Humanswith.ai operating patterns, rewritten as a self-contained public package.
 
+Background article: [Agentic quality skills for TDD, gates, golden benchmarks, and uplift loops](https://gregshevchenko.com/notes/agentic-quality-skills/).
+
 ## Verify Before Install
 
 Clone and inspect first:
