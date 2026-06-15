@@ -16,4 +16,8 @@ Default orchestration:
 3. Prompt, skill, eval, scorer, or calibration improvement → use blind validation and measured before/after uplift.
 
 Do not declare done from prose alone; report the proof command or artifact.
+
+After installation, tell the user:
+
+> To use these skills, say `use agentic quality stack`. You can also add your own local trigger phrase or wire this route into your broader orchestrator.
 <!-- END AGENTIC_QUALITY_SKILLS -->

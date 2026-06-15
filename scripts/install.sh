@@ -12,6 +12,9 @@ Usage: bash scripts/install.sh [--target DIR] [--dry-run] [--agent-docs write|sk
 
 Copies public agentic quality skills into a local skills directory.
 Default target: $HOME/.codex/skills
+
+After install, invoke the stack with:
+  use agentic quality stack
 USAGE
 }
 
@@ -49,6 +52,41 @@ case "$AGENT_DOCS" in
     ;;
 esac
 
+validate_target() {
+  case "$TARGET" in
+    ""|"/"|"$HOME"|"$HOME/"|".")
+      echo "install: refusing unsafe --target: $TARGET" >&2
+      exit 2
+      ;;
+  esac
+}
+
+safe_replace_dir() {
+  local src="$1"
+  local dst="$2"
+  local parent
+  local backup
+
+  parent="$(dirname "$dst")"
+  case "$dst" in
+    "$TARGET"/*) ;;
+    *)
+      echo "install: refusing to write outside target: $dst" >&2
+      exit 2
+      ;;
+  esac
+
+  mkdir -p "$parent"
+  backup="${dst}.bak.$$"
+  if [[ -e "$dst" ]]; then
+    mv "$dst" "$backup"
+  fi
+  cp -R "$src" "$dst"
+  if [[ -e "$backup" ]]; then
+    rm -R "$backup"
+  fi
+}
+
 copy_skill() {
   local skill="$1"
   local src="$ROOT/skills/$skill"
@@ -56,9 +94,7 @@ copy_skill() {
   if [[ "$DRY_RUN" -eq 1 ]]; then
     echo "would copy $src -> $dst"
   else
-    mkdir -p "$TARGET"
-    rm -rf "$dst"
-    cp -R "$src" "$dst"
+    safe_replace_dir "$src" "$dst"
     echo "installed $skill -> $dst"
   fi
 }
@@ -98,6 +134,7 @@ PY
   echo "updated managed block in $doc"
 }
 
+validate_target
 copy_skill test-driven-development
 copy_skill agentic-quality-gates
 copy_skill golden-benchmark-uplift-loop
@@ -109,3 +146,15 @@ else
 fi
 
 echo "install: OK"
+cat <<'NEXT'
+
+Next steps:
+  1. In your agent chat, say: use agentic quality stack
+  2. For TDD specifically, say: use test driven development
+  3. For benchmarks/evals, say: use golden benchmark uplift loop
+
+Optional:
+  - Add your own trigger phrase by editing the managed AGENTS.md block.
+  - Or add this stack to your existing orchestrator/routing docs.
+  - Full trigger dictionary: docs/TRIGGER_DICTIONARY.ru-en.yaml
+NEXT

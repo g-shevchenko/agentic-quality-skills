@@ -1,12 +1,19 @@
 {
   "name": "agentic-quality-skills",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "visibility": "public-personal",
   "expected_writes": [
     "$HOME/.codex/skills/test-driven-development",
     "$HOME/.codex/skills/agentic-quality-gates",
     "$HOME/.codex/skills/golden-benchmark-uplift-loop",
     "./AGENTS.md managed block unless --agent-docs skip"
+  ],
+  "safety_checks": [
+    "refuses target /",
+    "refuses target $HOME",
+    "refuses target .",
+    "writes only under the selected target",
+    "prints invocation commands after install"
   ],
   "network": {
     "install": false,

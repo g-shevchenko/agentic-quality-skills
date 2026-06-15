@@ -22,6 +22,12 @@ Then install locally:
 bash scripts/install.sh
 ```
 
+The installer prints the commands to use after installation, including:
+
+```text
+use agentic quality stack
+```
+
 Fast path after inspection:
 
 ```bash
@@ -34,6 +40,7 @@ bash scripts/install.sh --target "$HOME/.codex/skills"
 - `skills/agentic-quality-gates`
 - `skills/golden-benchmark-uplift-loop`
 - trigger dictionary: `docs/TRIGGER_DICTIONARY.ru-en.yaml`
+- command guide: `docs/COMMANDS.md`
 - an optional managed block in the current workspace `AGENTS.md`
 
 The default target is `$HOME/.codex/skills`. Use `--target <dir>` for Claude Code, Cursor, Windsurf, or another agent runtime.
@@ -54,6 +61,8 @@ It orchestrates:
 
 The package also includes a larger dictionary, so users can say natural phrases such as `verify red`, `lock tests`, `blind validation`, `golden regression`, `red flags`, `uplift loop`, `acceptance gate`, or the Russian equivalents in `docs/TRIGGER_DICTIONARY.ru-en.yaml`.
 
+To add your own local phrase, add it to the managed `AGENTS.md` block or to your existing orchestrator docs. See `docs/COMMANDS.md`.
+
 ## Skills
 
 ### `test-driven-development`
@@ -70,7 +79,7 @@ Use when improving a prompt, skill, scorer, eval, or calibration. Requires blind
 
 ## Privacy And Security
 
-The installer copies files locally and may write a managed docs block to `AGENTS.md` in the current directory. It does not ask for API keys, read secrets, contact external services, or run package managers.
+The installer copies files locally and may write a managed docs block to `AGENTS.md` in the current directory. It does not ask for API keys, read secrets, contact external services, or run package managers. It refuses unsafe targets such as `/`, `$HOME`, or `.`.
 
 See `VERIFY_BEFORE_INSTALL.md`, `SECURITY.md`, and `trust/agentic-quality-skills.trust.json`.
 
