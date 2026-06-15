@@ -1,7 +1,7 @@
 # Agentic Quality Skills
 
-Public, installable skills for agents that need stricter engineering discipline:
-verified TDD, quality gates, red flags, golden benchmarks, and measured uplift loops.
+Production-grade quality skills for AI coding agents: red-first TDD, quality gates,
+golden benchmarks, and measured uplift loops.
 
 Created from Humanswith.ai operating patterns, rewritten as a self-contained public package.
 
