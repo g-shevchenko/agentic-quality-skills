@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Quality Gates"
+  short_description: "Gates, red flags, and handoff rules"
+  default_prompt: "Use $agentic-quality-gates to classify risk and define acceptance gates before implementation."

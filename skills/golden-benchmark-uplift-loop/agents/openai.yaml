@@ -1,0 +1,4 @@
+interface:
+  display_name: "Golden Benchmark Uplift Loop"
+  short_description: "Blind goldens and measured uplift loops"
+  default_prompt: "Use $golden-benchmark-uplift-loop to improve this prompt, skill, eval, or scorer with blind validation and measured uplift."

@@ -1,0 +1,32 @@
+{
+  "name": "agentic-quality-skills",
+  "version": "0.1.0",
+  "visibility": "public-personal",
+  "expected_writes": [
+    "$HOME/.codex/skills/test-driven-development",
+    "$HOME/.codex/skills/agentic-quality-gates",
+    "$HOME/.codex/skills/golden-benchmark-uplift-loop",
+    "./AGENTS.md managed block unless --agent-docs skip"
+  ],
+  "network": {
+    "install": false,
+    "doctor": false,
+    "audit": false
+  },
+  "credentials": {
+    "required": false,
+    "reads_secret_files": false
+  },
+  "forbidden_patterns": [
+    "curl | bash",
+    "remote code execution during install",
+    "package manager install during install",
+    "shell profile mutation",
+    "git remote mutation"
+  ],
+  "proof_commands": [
+    "bash scripts/doctor.sh",
+    "bash scripts/audit-public-surface.sh",
+    "bash scripts/install.sh --dry-run"
+  ]
+}
