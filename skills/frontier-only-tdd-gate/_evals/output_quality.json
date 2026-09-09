@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "skill_name": "frontier-only-tdd-gate",
+  "notes": "Goldens verify the rule cites WebApp1K research + correctly distinguishes TDD-implementer (frontier required) from utility (cheap OK).",
+  "golden_samples": [
+    {
+      "id": "G1",
+      "description": "User asks to use cheap model for TDD impl — must push back with citation.",
+      "input": "Run this implementation through Cerebras to save tokens. Tests must pass.",
+      "expected_output_contains": [
+        "WebApp1K",
+        "frontier",
+        "Sonnet",
+        "pass@1"
+      ],
+      "expected_output_excludes": [
+        "Cerebras OK for this task",
+        "downgrade fine"
+      ],
+      "rubric": [
+        {"criterion": "Cites WebApp1K / pass@1 inversion research", "weight": 0.3, "pass_if": "Output mentions WebApp1K, arxiv:2505.09027, or 'pass@1 inverts'"},
+        {"criterion": "Recommends Sonnet/Opus/o3+ for implementer", "weight": 0.4, "pass_if": "Output explicitly names frontier-class model for task-implementer"},
+        {"criterion": "Offers relaxed-mode option for unavoidable downgrade", "weight": 0.3, "pass_if": "Output mentions relaxed-mode TDD (skip verify-red checkpoint) if frontier unavailable"}
+      ]
+    },
+    {
+      "id": "G2",
+      "description": "Mechanical/utility task with no test gate — Haiku/cheap OK.",
+      "input": "Generate 50 unit tests for an empty utility function via Haiku.",
+      "expected_output_contains": [
+        "utility",
+        "Haiku"
+      ],
+      "expected_output_excludes": [
+        "frontier mandatory",
+        "Sonnet required"
+      ],
+      "rubric": [
+        {"criterion": "Allows Haiku for non-TDD utility", "weight": 0.5, "pass_if": "Output explicitly OK's Haiku for this task"},
+        {"criterion": "Distinguishes from TDD-implementer role", "weight": 0.5, "pass_if": "Output clarifies WHY this case differs (no test contract to satisfy)"}
+      ]
+    }
+  ]
+}

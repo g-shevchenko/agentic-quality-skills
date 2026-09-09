@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "skill_name": "frontier-only-tdd-gate",
+  "notes": "Per the project rule (see your repo rules): fires when task is implementation/bugfix under TDD discipline. Frontier-class (Sonnet/Opus/o3+) mandatory for task-implementer + task-test-author. Haiku-class OK for verifier (read-only) + non-TDD utility.",
+  "should_trigger": [
+    {"prompt": "Implement the new SERP fallback chain — must pass the existing 12 tests + 3 new ones", "lang": "en", "reason": "Implementation under TDD → frontier-class implementer mandated"},
+    {"prompt": "TDD-fix this bug in retrieval-mcp — Sonnet/Opus implementer", "lang": "en", "reason": "Explicit TDD + frontier"},
+    {"prompt": "Cerebras-llama для написания implementation под failing tests — экономия токенов", "lang": "ru", "reason": "User wants weaker model for TDD task → trigger fires (warn against)"},
+    {"prompt": "напиши impl под этот test suite используя Haiku", "lang": "ru", "reason": "Haiku request for TDD impl → trigger fires to override"},
+    {"prompt": "run this fix through the cheap-model chain to save tokens", "lang": "en", "reason": "Cost-optimization request that would degrade TDD pass rate"}
+  ],
+  "shouldnt_trigger": [
+    {"prompt": "Generate 100 product descriptions via Haiku", "lang": "en", "reason": "Bulk content gen, no TDD harness → Haiku OK"},
+    {"prompt": "проверь типы в файле X через task-verifier", "lang": "ru", "reason": "Verifier role = read-only, Haiku-class OK"},
+    {"prompt": "translate this string from EN to RU", "lang": "en", "reason": "Trivial utility, no test gate"},
+    {"prompt": "summarize this PR description", "lang": "en", "reason": "Read-only summarization"},
+    {"prompt": "format JSON output", "lang": "en", "reason": "Mechanical utility"}
+  ]
+}

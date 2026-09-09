@@ -138,6 +138,10 @@ validate_target
 copy_skill test-driven-development
 copy_skill agentic-quality-gates
 copy_skill golden-benchmark-uplift-loop
+copy_skill test-immutability-lock
+copy_skill verify-red-checkpoint
+copy_skill property-based-testing
+copy_skill frontier-only-tdd-gate
 
 if [[ "$AGENT_DOCS" == "write" ]]; then
   write_agent_docs
