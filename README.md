@@ -1,7 +1,8 @@
 # Agentic Quality Skills
 
 Production-grade quality skills for AI coding agents: red-first TDD, quality gates,
-golden benchmarks, and measured uplift loops.
+golden benchmarks, measured uplift loops, test immutability, verify-red checkpoints,
+property-based testing, and frontier-model gating.
 
 Created from Humanswith.ai operating patterns, rewritten as a self-contained public package.
 
@@ -41,6 +42,10 @@ bash scripts/install.sh --target "$HOME/.codex/skills"
 - `skills/test-driven-development`
 - `skills/agentic-quality-gates`
 - `skills/golden-benchmark-uplift-loop`
+- `skills/test-immutability-lock`
+- `skills/verify-red-checkpoint`
+- `skills/property-based-testing`
+- `skills/frontier-only-tdd-gate`
 - trigger dictionary: `docs/TRIGGER_DICTIONARY.ru-en.yaml`
 - command guide: `docs/COMMANDS.md`
 - an optional managed block in the current workspace `AGENTS.md`
@@ -78,6 +83,22 @@ Use before non-trivial agentic work: classify task risk, define deterministic ac
 ### `golden-benchmark-uplift-loop`
 
 Use when improving a prompt, skill, scorer, eval, or calibration. Requires blind validation when the author has seen the answer key, deterministic graders, before/after measurement, and explicit caveats for small sample sizes.
+
+### `test-immutability-lock`
+
+Anti test-overfitting — existing test assertions may NOT be relaxed, deleted, weakened, or skipped. You may only ADD new assertions. Prevents the common AI failure mode where the model "fixes" a failing test by weakening it.
+
+### `verify-red-checkpoint`
+
+TDD Iron Law — capture verify-red proof (assertion failure, not Import/Syntax/NameError) before any implementation code. No production code without a failing test first.
+
+### `property-based-testing`
+
+Use when testing functions with wide input space (parsers, normalizers, scorers, schedulers, sort/filter/transform). Three property archetypes — invariant, inverse, idempotence — outperform example-based tests for LLM-generated code by 23-37% pass@1. Composes with `pbt-runner-mcp` (see [mcp-token-savers](https://github.com/g-shevchenko/mcp-token-savers)).
+
+### `frontier-only-tdd-gate`
+
+Strict TDD only with frontier-class models (Sonnet/Opus/o3+). Haiku-class models drop 30-69pp pass@1 under strict TDD. Use relaxed mode for weaker models.
 
 ## Privacy And Security
 
